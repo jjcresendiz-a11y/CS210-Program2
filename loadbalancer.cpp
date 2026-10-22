@@ -37,10 +37,10 @@ request loadbalancer::getRequest()
 
 bool loadbalancer::isRequestQueueEmpty()
 {
-  
+   return requestQueue.empty();
 } 
 
 int loadbalancer::getSize()
 {
-  
+   return static_cast<int>(requestQueue.size());
 } 
