@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <cstdlib>
-#include <ctime>
 #include <sstream>
 
 using namespace std;
@@ -32,8 +31,9 @@ request createRandomRequest()
 
 int main()
 {
-   // Set the seed for random number generation.
-   srand(time(NULL));
+   // A fixed seed makes every run deterministic for comparison and grading.
+   const unsigned int RANDOM_SEED = 1;
+   srand(RANDOM_SEED);
 
    // Create a load balancer.
    loadbalancer lb;
@@ -60,6 +60,7 @@ int main()
       int size = lb.getSize();
       int serverIndex = currTime % NUM_SERVERS;
 
+      // Check whether the selected webserver has finished its request.
       if (webarray[serverIndex].isRequestDone(currTime))
       {
          request r = webarray[serverIndex].getRequest();
