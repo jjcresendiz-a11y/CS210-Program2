@@ -54,13 +54,12 @@ int main()
    }
 
    // Run the simulation.
-   //while (lb.getTime() < 10000)
+   while (lb.getTime() < 10000)
    {
-      //int currTime = lb.getTime();
-      //int size = lb.getSize();
-      //int serverIndex = currTime % NUM_SERVERS;
+      int currTime = lb.getTime();
+      int size = lb.getSize();
+      int serverIndex = currTime % NUM_SERVERS;
 
-      /*
       if (webarray[serverIndex].isRequestDone(currTime))
       {
          request r = webarray[serverIndex].getRequest();
@@ -73,17 +72,16 @@ int main()
               << " to " << r.destination << endl;
 
          // Give the webserver its next request.
-         //webarray[serverIndex].addRequest(lb.getRequest(), currTime);
+         webarray[serverIndex].addRequest(lb.getRequest(), currTime);
       }
 
       // Occasionally add a new request to the load balancer.
       if (rand() % 10 == 0)
       {
-         //lb.addRequest(createRandomRequest());
+         lb.addRequest(createRandomRequest());
       }
 
-      //lb.incTime();
-      */
+      lb.incTime();
    }
 
    return 0;
