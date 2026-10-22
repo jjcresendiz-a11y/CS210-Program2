@@ -36,12 +36,12 @@ int main()
    srand(time(NULL));
 
    // Create a load balancer.
-   //loadbalancer lb;
+   loadbalancer lb;
 
    // Start off with a "full" queue.
    for (int i = 0; i < 10; i++)
    {
-      //lb.addRequest(createRandomRequest());
+      lb.addRequest(createRandomRequest());
    }
 
    // Create an array of webservers, each with an initial request.
@@ -50,7 +50,7 @@ int main()
    {
       webserver w(static_cast<char>(i + 65));
       webarray[i] = w;
-      //webarray[i].addRequest(lb.getRequest(), lb.getTime());
+      webarray[i].addRequest(lb.getRequest(), lb.getTime());
    }
 
    // Run the simulation.
