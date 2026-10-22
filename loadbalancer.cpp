@@ -17,8 +17,8 @@ void loadbalancer::incTime()
   
 void loadbalancer::addRequest(request r)
 {
- 
- 
+   requestQueue.push(r);
+   incTime();
 }
   
 request loadbalancer::getRequest()
