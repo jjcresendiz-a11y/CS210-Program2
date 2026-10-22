@@ -23,7 +23,16 @@ void loadbalancer::addRequest(request r)
   
 request loadbalancer::getRequest()
 {
-   // ignore warning here about no return value
+   incTime();
+
+   if (!requestQueue.empty())
+   {
+      request r = requestQueue.front();
+      requestQueue.pop();
+      return r;
+   }
+
+   return request{};
 }
 
 bool loadbalancer::isRequestQueueEmpty()
