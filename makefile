@@ -8,13 +8,13 @@ CXX=g++
 # 	-std=c++11 -> use the C++ 2011 ISO standard
 CXXFLAGS=-Wall -g -std=c++11
 # output flags
-CXXOUT=-o p2
+CXXOUT=-o p3
 # separate compilation
 CXXSEP=-c 
 
 # loadbalancer main compilation
-p2: p2.cpp webserver.o loadbalancer.o request.h
-	$(CXX) $(CXXFLAGS) $(CXXOUT) p2.cpp webserver.o loadbalancer.o
+p3: p3.cpp webserver.o loadbalancer.o request.h
+	$(CXX) $(CXXFLAGS) $(CXXOUT) p3.cpp webserver.o loadbalancer.o
 
 # compile webserver.o
 webserver.o: webserver.cpp request.h
@@ -26,8 +26,9 @@ loadbalancer.o: loadbalancer.cpp loadbalancer.h request.h
 
 # clean all *.o files and executable
 clean:
-	rm -f *.o *.gch p2
+	rm -f *.o *.gch p3
 
 # clean all *.o files
 cleano:
 	rm -f *.o
+

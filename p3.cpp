@@ -41,14 +41,15 @@ int main()
    // Start off with a "full" queue.
    for (int i = 0; i < 10; i++)
    {
-      lb.addRequest(createRandomRequest());
+      request r = createRandomRequest();
+      lb.addRequest(r);
    }
 
    // Create an array of webservers, each with an initial request.
    webserver webarray[NUM_SERVERS];
    for (int i = 0; i < NUM_SERVERS; i++)
    {
-      webserver w(static_cast<char>(i + 65));
+      webserver w((char) (i + 65));
       webarray[i] = w;
       webarray[i].addRequest(lb.getRequest(), lb.getTime());
    }
@@ -58,28 +59,28 @@ int main()
    {
       int currTime = lb.getTime();
       int size = lb.getSize();
-      int serverIndex = currTime % NUM_SERVERS;
 
       // Check whether the selected webserver has finished its request.
-      if (webarray[serverIndex].isRequestDone(currTime))
+      if (webarray[currTime % NUM_SERVERS].isRequestDone(currTime))
       {
-         request r = webarray[serverIndex].getRequest();
+         request r = webarray[currTime % NUM_SERVERS].getRequest();
 
          cout << "Finished at " << currTime << " "
-              << webarray[serverIndex].getName();
+              << webarray[currTime % NUM_SERVERS].getName();
          cout << " pid " << r.pid << "/" << size
               << " process time was " << r.processTime;
          cout << " processed request from " << r.source
               << " to " << r.destination << endl;
 
          // Give the webserver its next request.
-         webarray[serverIndex].addRequest(lb.getRequest(), currTime);
+         webarray[currTime % NUM_SERVERS].addRequest(lb.getRequest(), currTime);
       }
 
       // Occasionally add a new request to the load balancer.
       if (rand() % 10 == 0)
       {
-         lb.addRequest(createRandomRequest());
+         request r = createRandomRequest();
+         lb.addRequest(r);
       }
 
       lb.incTime();
