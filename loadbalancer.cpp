@@ -27,12 +27,13 @@ request loadbalancer::getRequest()
 
    if (!requestQueue.empty())
    {
-      request r = requestQueue.front(); // queue
-      //request r = requestQueue.top(); // priority_queue and stack
+      //request r = requestQueue.front(); // queue
+      request r = requestQueue.top(); // priority_queue and stack
       requestQueue.pop();
       return r;
    }
 
+   // Keep the method well-defined even if it is called on an empty queue.
    return request{};
 }
 
