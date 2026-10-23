@@ -32,8 +32,7 @@ request createRandomRequest()
 int main()
 {
    // A fixed seed makes every run deterministic for comparison and grading.
-   const unsigned int RANDOM_SEED = 1;
-   srand(RANDOM_SEED);
+   srand(1);
 
    // Create a load balancer.
    loadbalancer lb;
@@ -68,9 +67,7 @@ int main()
          cout << "Finished at " << currTime << " "
               << webarray[currTime % NUM_SERVERS].getName();
          cout << " pid " << r.pid << "/" << size
-              << " process time was " << r.processTime;
-         cout << " processed request from " << r.source
-              << " to " << r.destination << endl;
+              << " process time was " << r.processTime << endl;
 
          // Give the webserver its next request.
          webarray[currTime % NUM_SERVERS].addRequest(lb.getRequest(), currTime);
